@@ -1,10 +1,10 @@
 /*
 * Author: Ol' Jim
-* Date: 06/13/2012
+* Date: 10/22/2025
+* Editor: Ted
 * ByteForge Systems
 * MIPS-Translatron 3000
 */
-
 
 #include "Instruction.h"
 

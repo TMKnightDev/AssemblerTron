@@ -1,3 +1,11 @@
+/*
+* Author: Ol' Jim
+* Date: 10/22/2025
+* Editor: Ted
+* ByteForge Systems
+* MIPS-Translatron 3000
+*/
+
 #include "Instruction.h"
 
 void andi_immd_assm(void) {

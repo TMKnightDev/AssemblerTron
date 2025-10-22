@@ -1,6 +1,6 @@
 /*
-* Author: Ol' Jim
-* Date: 06/13/2012
+* Author: Ted
+* Date: 10/22/2025
 * ByteForge Systems
 * MIPS-Translatron 3000
 */

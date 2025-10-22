@@ -1,10 +1,11 @@
-#include "Instruction.h"
-/**
- * @author Theodore Miesel
- * @date 10/21/2025
- * @file MULT.c
- */
+/*
+* Author: Ted
+* Date: 10/22/2025
+* ByteForge Systems
+* MIPS-Translatron 3000
+*/
 
+#include "Instruction.h"
 
 void mult_reg_assm(void) {
 	// Checking that the op code matches
