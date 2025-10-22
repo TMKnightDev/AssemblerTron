@@ -1,6 +1,8 @@
 /*
 * Author: Ol' Jim
+* Editor: Luke DeVault
 * Date: 06/13/2012
+* Date Edited: 10/22/2025
 * ByteForge Systems
 * MIPS-Translatron 3000
 */
@@ -26,13 +28,13 @@ void slt_reg_assm(void) {
 		return;
 	}
 
-	// This is AND register, so param 2 needs to be a register
+	// This is SLT register, so param 2 needs to be a register
 	if (PARAM2.type != REGISTER) {
 		state = MISSING_REG;
 		return;
 	}
 
-	// This is AND register, so param 3 needs to be a register
+	// This is SLT register, so param 3 needs to be a register
 	if (PARAM3.type != REGISTER) {
 		state = MISSING_REG;
 		return;
@@ -70,14 +72,14 @@ void slt_reg_assm(void) {
 	// Set the funct 
 	setBits_str(5, "101010");
 
-	// set Rd
-	setBits_num(20, PARAM1.value, 5);
+	// set Rd   Edit: corrected from bit 20 to 15
+	setBits_num(15, PARAM1.value, 5);
 
 	// set Rs
 	setBits_num(25, PARAM2.value, 5);
 
-	// set Rt
-	setBits_num(15, PARAM3.value, 5);
+	// set Rt  Edit: corrected from bit 15 to 20
+	setBits_num(20, PARAM3.value, 5);
 
 	// tell the system the encoding is done
 	state = COMPLETE_ENCODE;
