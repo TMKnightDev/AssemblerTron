@@ -1,5 +1,6 @@
 /*
 * Author: Ol' Jim
+* Editor: Josiah Fout
 * Date: 06/13/2012
 * ByteForge Systems
 * MIPS-Translatron 3000
@@ -91,7 +92,7 @@ void sub_reg_bin(void) {
 	// check_bits(start_bit, bit_string) returns 0 if the bit_string matches
 	// any x will be skipped
 	// If the manual shows (0), then the value of that bit doesnt matter
-	if (checkBits(31, "000000") != 0 || checkBits(5, "100100") != 0 ) {
+	if (checkBits(31, "000000") != 0 || checkBits(5, "100010") != 0 ) { //Checked bit was incorrect (100100)
 		state = WRONG_COMMAND;
 		return;
 	}
