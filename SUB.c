@@ -6,6 +6,8 @@
 * MIPS-Translatron 3000
 */
 
+// 10.23.15 JF: Fixed several issues with the SUB instruction assembly and binary decoding
+// 10.31.25 JF: Also added comments for clarity
 #include "Instruction.h"
 
 void sub_reg_assm(void) {
@@ -22,19 +24,19 @@ void sub_reg_assm(void) {
 	*/
 
 	// Generally the first parameter should always be a register
-	if (PARAM1.type != REGISTER) {
+	if (PARAM1.type != REGISTER) { // Rd
 		state = MISSING_REG;
 		return;
 	}
 
 	// This is SUB register, so param 2 needs to be a register
-	if (PARAM2.type != REGISTER) {
+	if (PARAM2.type != REGISTER) { // Rs
 		state = MISSING_REG;
 		return;
 	}
 
 	// This is SUB register, so param 3 needs to be a register
-	if (PARAM3.type != REGISTER) {
+	if (PARAM3.type != REGISTER) { // Rt
 		state = MISSING_REG;
 		return;
 	}
@@ -88,10 +90,12 @@ void sub_reg_assm(void) {
 }
 
 void sub_reg_bin(void) {
+	
 	// Check if the op code bits match
 	// check_bits(start_bit, bit_string) returns 0 if the bit_string matches
 	// any x will be skipped
 	// If the manual shows (0), then the value of that bit doesnt matter
+
 	if (checkBits(31, "000000") != 0 || checkBits(5, "100010") != 0 ) { //Checked bit was incorrect (100100)
 		state = WRONG_COMMAND;
 		return;
@@ -111,9 +115,12 @@ void sub_reg_bin(void) {
 		Setting Instuciton values
 	*/
 
+	// set op
 	setOp("SUB");
+	
 	//setCond_num(cond);
 	//setParam(param_num, param_type, param_value)
+
 	setParam(1, REGISTER, Rd); //destination
 	setParam(2, REGISTER, Rs); //first source register operand
 	setParam(3, REGISTER, Rt); //second source register operand

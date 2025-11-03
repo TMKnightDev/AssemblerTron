@@ -7,10 +7,14 @@
 #include "Instruction.h"
 
 void mflo_reg_assm(void) {
+
 	// Checks to see if Opcode matches using strcmp
 	// strcmp(string1, string2) return 0 if they match
+
 	if (strcmp(OP_CODE, "MFLO") != 0) {
+
 		// Produces an error if they do not match, MFLO is not the correct command
+
 		state = WRONG_COMMAND;
 		return;
 	}
@@ -36,9 +40,13 @@ void mflo_reg_assm(void) {
 	}
 
 	/*
+
 	Putting the binary together
+
 	*/
+
 	// Set the opcode
+	
 	setBits_str(31, "000000");
 	// set rd
 	setBits_num(15, PARAM1.value, 5);
@@ -57,10 +65,13 @@ void mflo_reg_assm(void) {
 }
 
 void mflo_reg_bin(void) {
+
 	// Check if the op code bits match
 	// check_bits(start_bit, bit_string) returns 0 if the bit_string matches
 	//  any x will be skipped
 	// If the manual shows (0), then the value of that bit doesnt matter
+
+
 	if (checkBits(31, "000000") != 0 || checkBits(5, "010010") != 0 || checkBits(25, "0000000000") != 0 || checkBits(10, "00000") != 0) {
 		state = WRONG_COMMAND;
 		return;

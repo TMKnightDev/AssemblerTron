@@ -107,8 +107,10 @@ void beq_immd_bin(void) {
 	*/
 
 	setOp("BEQ");
+	
 	//setCond_num(cond);
 	//setParam(param_num, param_type, param_value)
+
 	setParam(1, REGISTER, Rs); // source register operand
 	setParam(2, REGISTER, Rt); // destination register operand
 	setParam(3, IMMEDIATE, offset); // immediate operand

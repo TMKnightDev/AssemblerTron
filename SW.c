@@ -6,6 +6,10 @@
  * MIPS-Translatron 3000
  */
 
+ // 10.23.25 - Fixed several issues with the SW instruction assembly and binary decoding
+ // 10.31.25 -added comments for clarity
+ //JF
+
 #include "Instruction.h"
 
 void sw_immd_assm(void) {
@@ -63,10 +67,13 @@ void sw_immd_assm(void) {
 
     // Set the opcode
     setBits_str(31, "101011");
+   
     // set Rt
     setBits_num(20, PARAM1.value, 5);
+   
     // set Rs
     setBits_num(25, PARAM3.value, 5);
+   
     // set immediate/offset
     setBits_num(15, PARAM2.value, 16);
 
@@ -94,10 +101,13 @@ void sw_immd_bin(void) {
 
     */
 
+    // set op 
     setOp("SW");
     setParam(1, REGISTER, Rt);  // destination
-    setParam(3, REGISTER, Rs);
-    setParam(2, IMMEDIATE, offset);
+
+    setParam(3, REGISTER, Rs); // base register
+
+    setParam(2, IMMEDIATE, offset); // offset value
 
     // tell the system that the decoding is complete
     state = COMPLETE_DECODE;
