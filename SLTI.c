@@ -8,7 +8,6 @@
 // Happy Halloween!
 //JF: Added SLTI instruction assembly and binary decoding
 
-
 #include "Instruction.h"
 
 void slti_immd_assm(void) {
@@ -81,7 +80,7 @@ void slti_immd_assm(void) {
 
 void slti_immd_bin(void) {
 	//checking that the op code matches
-	if (checkBits_str(31, "001010") != 0) {
+	if (checkBits(31, "001010") != 0) {
 		state = WRONG_COMMAND;
 		return;
 	}
@@ -92,13 +91,13 @@ void slti_immd_bin(void) {
 	//get binary
 
 	// Rt
-	uint32_t Rt = getBits_num(20, 5);
+	uint32_t Rt = getBits(20, 5);
 
 	// Rs
-	uint32_t Rs = getBits_num(25, 5);
+	uint32_t Rs = getBits(25, 5);
 
 	// immediate
-	uint32_t imm16 = getBits_num(15, 16);
+	uint32_t imm16 = getBits(15, 16);
 
 	/*
 		Setting Instruction values
@@ -109,9 +108,9 @@ void slti_immd_bin(void) {
 	//setCond_num(cond);
 	//setParam(param_number, Param_Type, value);
 
-	setParam1(1, REGISTER, Rt); // destination
-	setParam2(2, REGISTER, Rs); // source
-	setParam3(3, IMMEDIATE, imm16); // immediate value
+	setParam(1, REGISTER, Rt); // destination
+	setParam(2, REGISTER, Rs); // source
+	setParam(3, IMMEDIATE, imm16); // immediate value
 
 	// Indicate that decoding is complete
 
