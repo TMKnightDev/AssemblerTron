@@ -8,6 +8,7 @@
 
  // 10.23.25 - Fixed several issues with the SW instruction assembly and binary decoding
  // 10.31.25 -added comments for clarity
+ // 11.6.25 - fixed my lazy solution to the Rs and Rt bug for increased clarity
  //JF
 
 #include "Instruction.h"
@@ -31,12 +32,12 @@ void sw_immd_assm(void) {
     }
 
     // Rs should be a register
-    if (PARAM3.type != REGISTER) {
+    if (PARAM2.type != REGISTER) { //fixed lazy solution
         state = MISSING_REG;
         return;
     }
     // The offset/immediate should be an immediate
-    if (PARAM2.type != IMMEDIATE) {
+    if (PARAM3.type != IMMEDIATE) {
         state = INVALID_PARAM;
         return;
     }
@@ -52,11 +53,11 @@ void sw_immd_assm(void) {
         return;
     }
     // Rs should be 31 or less
-    if (PARAM3.value > 31) {  // was PARAM3, fixed
+    if (PARAM2.value > 31) {  // was PARAM3, fixed
         state = INVALID_REG;
         return;
     }
-    if (PARAM2.value > 0xFFFF) {  // immediate should be 16 bits
+    if (PARAM3.value > 0xFFFF) {  // immediate should be 16 bits
         state = INVALID_IMMED;
         return;
     }
@@ -72,10 +73,10 @@ void sw_immd_assm(void) {
     setBits_num(20, PARAM1.value, 5);
    
     // set Rs
-    setBits_num(25, PARAM3.value, 5);
+    setBits_num(25, PARAM2.value, 5);
    
     // set immediate/offset
-    setBits_num(15, PARAM2.value, 16);
+    setBits_num(15, PARAM3.value, 16);
 
     // Tell the system that the encoding is complete
     state = COMPLETE_ENCODE;
@@ -105,9 +106,9 @@ void sw_immd_bin(void) {
     setOp("SW");
     setParam(1, REGISTER, Rt);  // destination
 
-    setParam(3, REGISTER, Rs); // base register
+    setParam(2, REGISTER, Rs); // base register
 
-    setParam(2, IMMEDIATE, offset); // offset value
+    setParam(3, IMMEDIATE, offset); // offset value
 
     // tell the system that the decoding is complete
     state = COMPLETE_DECODE;
